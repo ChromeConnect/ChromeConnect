@@ -71,7 +71,7 @@ for (key in topicsObject) {
   let listItemElement = document.createElement("li");
   listItemElement.addEventListener("click", function () {
     //redirecting to the website
-    window.open("https://www.nba.com/");
+    window.open("https://chromechat.herokuapp.com/");
   });
   listItemElement.appendChild(document.createTextNode(key));
   unorderedList.appendChild(listItemElement);
