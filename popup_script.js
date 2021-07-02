@@ -39,7 +39,7 @@ addTopicButton.addEventListener("click", function () {
 });
 
 //fetch topics from local storage every time popup is opened
-chrome.runtime.sendMessage(
+/* chrome.runtime.sendMessage(
   {
     message: "get_topics",
   },
@@ -56,4 +56,23 @@ chrome.runtime.sendMessage(
       }
     }
   }
-);
+); */
+
+//***************************************************************************************************** */
+
+//mock firebase call for list items.
+let topicsObject = {
+  Lobby: "default",
+  topicA: "default",
+  topicC: "default",
+  topicD: "default",
+};
+for (key in topicsObject) {
+  let listItemElement = document.createElement("li");
+  listItemElement.addEventListener("click", function () {
+    //redirecting to the website
+    window.open("https://www.nba.com/");
+  });
+  listItemElement.appendChild(document.createTextNode(key));
+  unorderedList.appendChild(listItemElement);
+}

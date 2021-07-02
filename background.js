@@ -1,8 +1,10 @@
 //fetch all topics and store into local storage as soon as background is injected
+/* 
+
 var db = null;
 self.importScripts("firebase/app.js", "firebase/realtimedatabase.js");
 firebaseConfig = {
-  /*config data here*/
+
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -25,7 +27,8 @@ function fetchAllTopics() {
     });
 }
 
-fetchAllTopics();
+fetchAllTopics(); 
+*/
 
 //set default name when user first loads website
 chrome.runtime.onInstalled.addListener(() => {
@@ -87,13 +90,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   } else if (request.message === "add_topic") {
     //add to database
-    firebase
+    /*     firebase
       .database()
       .ref()
       .child("sequelize")
       .child(request.payload)
       .set("chrome email here");
     //call fetch topics
-    fetchAllTopics();
+    fetchAllTopics(); */
   }
 });
