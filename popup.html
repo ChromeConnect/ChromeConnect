@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="field">
+        <label
+          class="label is-medium has-background-warning"
+          style="padding: 5px"
+          >Chrome Connect</label
+        >
+        <label style="padding: 5px" class="label" id="displayNameText"
+          >Name: "..."</label
+        >
+        <div class="control" style="padding: 5px">
+          <input
+            class="input is-small"
+            id="nameInput"
+            placeholder="..."
+            style="width: 170px"
+          />
+          <button class="button is-primary is-small" id="changeNameButton">
+            Change Name
+          </button>
+        </div>
+      </div>
+      <div class="field" style="padding: 5px">
+        <div class="control">
+          <textarea
+            id="topicInput"
+            style="max-width: 170px; min-width: 170px; max-height: 100px"
+          ></textarea>
+          <button class="button is-danger is-small" id="addTopicButton">
+            Add Topic
+          </button>
+        </div>
+      </div>
+      <div class="field" style="padding: 5px">
+        <ul
+          id="unorderedList"
+          style="overflow: hidden; overflow-y: scroll; max-height: 150px"
+        ></ul>
+      </div>
+    </div>
+
+    <script src="popup_script.js"></script>
+  </body>
+</html>
