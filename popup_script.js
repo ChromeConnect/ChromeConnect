@@ -38,7 +38,7 @@ addTopicButton.addEventListener("click", function () {
   chrome.storage.local.get("name", (data) => {
     window.open(
       //"https://chromechat.herokuapp.com/",
-      `http://localhost:8080/${data.name}+${topicInput.value}`,
+      `http://localhost:8080/${data.name}+${replaceSpaces(topicInput.value)}`,
       "popUpWindow",
       "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
     );
@@ -60,7 +60,9 @@ chrome.runtime.sendMessage(
           chrome.storage.local.get("name", (data) => {
             window.open(
               //"https://chromechat.herokuapp.com/",
-              `http://localhost:8080/${data.name}+${this.innerText}`,
+              `http://localhost:8080/${data.name}+${replaceSpaces(
+                this.innerText
+              )}`,
               "popUpWindow",
               "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
             );
@@ -72,3 +74,7 @@ chrome.runtime.sendMessage(
     }
   }
 );
+
+function replaceSpaces(topicString) {
+  return topicString.split(" ").join("-");
+}
