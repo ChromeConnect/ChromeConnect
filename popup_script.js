@@ -35,11 +35,18 @@ addTopicButton.addEventListener("click", function () {
     message: "add_topic",
     payload: topicInput.value,
   });
-  window.open("https://www.nba.com/");
+  chrome.storage.local.get("name", (data) => {
+    window.open(
+      //"https://chromechat.herokuapp.com/",
+      `http://localhost:8080/${data.name}+${topicInput.value}`,
+      "popUpWindow",
+      "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
+    );
+  });
 });
 
 //fetch topics from local storage every time popup is opened
-/* chrome.runtime.sendMessage(
+chrome.runtime.sendMessage(
   {
     message: "get_topics",
   },
@@ -49,30 +56,19 @@ addTopicButton.addEventListener("click", function () {
       for (key in topicsObject) {
         let listItemElement = document.createElement("li");
         listItemElement.addEventListener("click", function () {
-          window.open("https://www.nba.com/");
+          //get name from local storage
+          chrome.storage.local.get("name", (data) => {
+            window.open(
+              //"https://chromechat.herokuapp.com/",
+              `http://localhost:8080/${data.name}+${this.innerText}`,
+              "popUpWindow",
+              "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
+            );
+          });
         });
         listItemElement.appendChild(document.createTextNode(key));
         unorderedList.appendChild(listItemElement);
       }
     }
   }
-); */
-
-//***************************************************************************************************** */
-
-//mock firebase call for list items.
-let topicsObject = {
-  Lobby: "default",
-  topicA: "default",
-  topicC: "default",
-  topicD: "default",
-};
-for (key in topicsObject) {
-  let listItemElement = document.createElement("li");
-  listItemElement.addEventListener("click", function () {
-    //redirecting to the website
-    window.open("https://chromechat.herokuapp.com/");
-  });
-  listItemElement.appendChild(document.createTextNode(key));
-  unorderedList.appendChild(listItemElement);
-}
+);
