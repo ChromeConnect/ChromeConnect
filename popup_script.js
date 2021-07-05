@@ -40,7 +40,7 @@ addTopicButton.addEventListener("click", function () {
       //"https://chromechat.herokuapp.com/",
       `http://localhost:8080/${data.name}+${replaceSpaces(topicInput.value)}`,
       "popUpWindow",
-      "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
+      "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
     );
   });
 });
@@ -64,7 +64,7 @@ chrome.runtime.sendMessage(
                 this.innerText
               )}`,
               "popUpWindow",
-              "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=yes,location=no,directories=no, status=yes"
+              "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
             );
           });
         });
