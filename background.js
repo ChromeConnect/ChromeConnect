@@ -113,14 +113,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
     return true;
   } else if (request.message === "add_topic") {
-    //add to database
-    firebase
-      .database()
-      .ref()
-      .child("sequelize")
-      .child(request.payload)
-      .child("creator")
-      .set("devpablolopez");
+    chrome.identity.getProfileUserInfo((userInfo) => {
+      let email = userInfo.email.toString().slice(0, -10);
+      //add to database
+      firebase
+        .database()
+        .ref()
+        .child("sequelize")
+        .child(request.payload)
+        .child("creator")
+        .set(email);
+    });
     //call fetch topics
     fetchAllTopics();
   }
