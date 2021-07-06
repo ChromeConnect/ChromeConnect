@@ -123,8 +123,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         .child(request.payload)
         .child("creator")
         .set(email);
+      //call fetch topics
+      fetchAllTopics();
     });
-    //call fetch topics
-    fetchAllTopics();
   }
 });
