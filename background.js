@@ -2,7 +2,15 @@
 
 var db = null;
 self.importScripts("firebase/app.js", "firebase/realtimedatabase.js");
-firebaseConfig = {};
+firebaseConfig = {
+  apiKey: "AIzaSyC6w00fztqJTzRhsSdDUi1v1-TeT56pp9k",
+  authDomain: "chromeconnect-e693c.firebaseapp.com",
+  databaseURL: "https://chromeconnect-e693c-default-rtdb.firebaseio.com",
+  projectId: "chromeconnect-e693c",
+  storageBucket: "chromeconnect-e693c.appspot.com",
+  messagingSenderId: "1041375254209",
+  appId: "1:1041375254209:web:6c9ad1031bbebfd0bf6640",
+};
 
 firebase.initializeApp(firebaseConfig);
 
@@ -84,9 +92,35 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
 
     return true;
+  } else if (request.message === "search_topic") {
+    chrome.storage.local.get("topics", (data) => {
+      if (chrome.runtime.lastError) {
+        sendResponse({
+          message: "fail",
+        });
+
+        return;
+      }
+      //filter object and send back results
+      const topicsArray = Object.keys(data.topics);
+      const results = topicsArray.filter((topic) => {
+        return topic.includes(request.payload);
+      });
+      sendResponse({
+        message: "success",
+        payload: results,
+      });
+    });
+    return true;
   } else if (request.message === "add_topic") {
     //add to database
-    firebase.database().ref().child("sequelize").child(request.payload).set("");
+    firebase
+      .database()
+      .ref()
+      .child("sequelize")
+      .child(request.payload)
+      .child("creator")
+      .set("devpablolopez");
     //call fetch topics
     fetchAllTopics();
   }
