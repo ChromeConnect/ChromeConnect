@@ -22,5 +22,5 @@
     }
   },
   "permissions": ["activeTab", "tabs", "storage", "scripting"],
-  "host_permissions": ["https://sequelize.org/*"]
+  "host_permissions": ["https://sequelize.org/*", "http://localhost:8080/"]
 }
