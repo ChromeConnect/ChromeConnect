@@ -15,12 +15,18 @@ viewMyTopicsButton.addEventListener("click", function () {
     },
     (response) => {
       if (response.message === "success") {
-        console.log(response.payload); //["new", "other"]
-        //unorderedList.innerHTML = ""
-        //create list again but with response.payload
-        //add delete button next to each list item
-        //delete closes popup, deletes from firebase, shows alert saying deleted
-        //reset local storage by recalling fetchAllTopics()
+        //console.log(response.payload); //["new", "other"]
+        unorderedList.innerHTML = "";
+        let arrayOfTopics = response.payload;
+        for (let i = 0; i < 10; i++) {
+          if (arrayOfTopics[i]) {
+            let listItemElement = document.createElement("li");
+            listItemElement.appendChild(
+              document.createTextNode(arrayOfTopics[i])
+            );
+            unorderedList.appendChild(listItemElement);
+          }
+        }
       }
     }
   );

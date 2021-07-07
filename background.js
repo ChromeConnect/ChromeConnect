@@ -137,6 +137,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         .then((snapshot) => {
           if (snapshot.exists()) {
             /*
+            snapshot.val()
           {
             new: {creator: "devpablolopez"}
             other: {creator: "devpablolopez"}
