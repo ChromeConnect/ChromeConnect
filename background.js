@@ -59,6 +59,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
 
     return true;
+  } else if (request.message === "delete_topic") {
+    firebase
+      .database()
+      .ref()
+      .child("sequelize")
+      .child(request.payload)
+      .remove();
+    //call fetch topics to reset local storage
+    fetchAllTopics();
   } else if (request.message === "change_name") {
     chrome.storage.local.set(
       {

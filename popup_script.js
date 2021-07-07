@@ -39,11 +39,20 @@ viewMyTopicsButton.addEventListener("click", function () {
               });
               deleteButton.textContent = "Delete";
               deleteButton.addEventListener("click", function () {
-                //somehow send message to delete topic in firebase
-                //close popup
+                const parentListItemText = deleteButton.parentElement.innerText;
+                const topicToDelete = parentListItemText.substring(
+                  0,
+                  parentListItemText.length - 6
+                );
+                //send message to backend to delete from firebase and reset local storage
+                chrome.runtime.sendMessage({
+                  message: "delete_topic",
+                  payload: topicToDelete,
+                });
+                //prevent chat window from opening
                 window.close();
-                //show alert
-                alert("Successfully Deleted Topic");
+                //tell user deletion was successful
+                alert(`Deleted: ${topicToDelete}`);
               });
               listItemElement.appendChild(deleteButton);
               unorderedList.appendChild(listItemElement);
