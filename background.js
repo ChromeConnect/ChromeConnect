@@ -2,15 +2,7 @@
 
 var db = null;
 self.importScripts("firebase/app.js", "firebase/realtimedatabase.js");
-firebaseConfig = {
-  apiKey: "AIzaSyC6w00fztqJTzRhsSdDUi1v1-TeT56pp9k",
-  authDomain: "chromeconnect-e693c.firebaseapp.com",
-  databaseURL: "https://chromeconnect-e693c-default-rtdb.firebaseio.com",
-  projectId: "chromeconnect-e693c",
-  storageBucket: "chromeconnect-e693c.appspot.com",
-  messagingSenderId: "1041375254209",
-  appId: "1:1041375254209:web:6c9ad1031bbebfd0bf6640",
-};
+firebaseConfig = {};
 
 firebase.initializeApp(firebaseConfig);
 
