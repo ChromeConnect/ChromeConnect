@@ -8,19 +8,19 @@ let searchTopicInput = document.getElementById("searchTopicInput");
 let searchTopicButton = document.getElementById("searchTopicButton");
 let viewMyTopicsButton = document.getElementById("viewMyTopicsButton");
 
-//fetch from firebase, with creator attribute
-//if match my email, delete it from firebase, and fetch all topics from firebase again
-//...therefore resetting local storage
-//will need a call for viewing
-//another call for deleting and setting topics again
 viewMyTopicsButton.addEventListener("click", function () {
   chrome.runtime.sendMessage(
     {
-      message: "search_topic",
-      payload: searchTopicInput.value,
+      message: "get_my_topics",
     },
     (response) => {
       if (response.message === "success") {
+        console.log(response.payload); //["new", "other"]
+        //unorderedList.innerHTML = ""
+        //create list again but with response.payload
+        //add delete button next to each list item
+        //delete closes popup, deletes from firebase, shows alert saying deleted
+        //reset local storage by recalling fetchAllTopics()
       }
     }
   );

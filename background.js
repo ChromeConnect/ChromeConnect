@@ -126,5 +126,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       //call fetch topics
       fetchAllTopics();
     });
+  } else if (request.message === "get_my_topics") {
+    chrome.identity.getProfileUserInfo((userInfo) => {
+      let email = userInfo.email.toString().slice(0, -10);
+      firebase
+        .database()
+        .ref()
+        .child("sequelize")
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            /*
+          {
+            new: {creator: "devpablolopez"}
+            other: {creator: "devpablolopez"}
+            topicA: {creator: "default"}
+            topicB: {creator: "default"}
+          }
+        */
+            let data = snapshot.val();
+            let arrayOfTopics = Object.keys(data).filter(function (topic) {
+              return email === data[topic].creator;
+            });
+            sendResponse({
+              message: "success",
+              payload: arrayOfTopics,
+            });
+          } else {
+            console.log("No data available");
+          }
+        });
+    });
+    return true;
   }
 });
