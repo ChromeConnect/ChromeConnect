@@ -39,6 +39,9 @@ viewMyTopicsButton.addEventListener("click", function () {
               });
               deleteButton.textContent = "Delete";
               deleteButton.addEventListener("click", function () {
+                //prevent chat window from opening
+                window.close();
+
                 const parentListItemText = deleteButton.parentElement.innerText;
                 const topicToDelete = parentListItemText.substring(
                   0,
@@ -49,8 +52,6 @@ viewMyTopicsButton.addEventListener("click", function () {
                   message: "delete_topic",
                   payload: topicToDelete,
                 });
-                //prevent chat window from opening
-                window.close();
                 //tell user deletion was successful
                 alert(`Deleted: ${topicToDelete}`);
               });
