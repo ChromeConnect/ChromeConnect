@@ -5,6 +5,33 @@ let unorderedList = document.getElementById("unorderedList");
 let addTopicButton = document.getElementById("addTopicButton");
 let topicInput = document.getElementById("topicInput");
 
+
+
+let currentTab
+chrome.tabs.query({active: true, currentWindow: true},async function(tabs){   
+	currentTab = tabs[0].url;
+  console.log(currentTab)
+  if(!currentTab.includes('sequelize.org')){
+    chrome.action.setPopup({popup: 'deniedPopup.html'})
+  } else {
+    chrome.action.setPopup({popup: 'popup.html'})
+  }
+});
+
+// chrome.runtime.sendMessage(
+//   {
+//     payload: currentTab,
+//     message: 'getUrl'
+//   },
+//   (respone) => {
+//     if(respone.message =='success') {
+//       console.log(response.payload)
+//     }
+//   }
+// )
+
+
+
 chrome.runtime.sendMessage(
   {
     message: "get_name",
