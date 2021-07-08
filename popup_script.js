@@ -151,7 +151,7 @@ chrome.runtime.sendMessage(
   },
   (response) => {
     if (response.message === "success") {
-      displayNameText.innerHTML = `Name: "${response.payload}"`;
+      displayNameText.innerText = `Name: "${response.payload}"`;
     }
   }
 );
@@ -164,7 +164,7 @@ changeNameButton.addEventListener("click", function () {
     },
     (response) => {
       if (response.message === "success") {
-        displayNameText.innerHTML = `Name: "${response.payload}"`;
+        displayNameText.innerText = `Name: "${response.payload}"`;
       }
     }
   );
