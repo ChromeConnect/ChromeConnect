@@ -1,10 +1,50 @@
 //fetch all topics and store into local storage as soon as background is injected
+//const deniedPopup = require("./deniedPopup")
 
 var db = null;
 self.importScripts("firebase/app.js", "firebase/realtimedatabase.js");
-firebaseConfig = {};
+firebaseConfig = {
+  apiKey: "AIzaSyC6w00fztqJTzRhsSdDUi1v1-TeT56pp9k",
+  authDomain: "chromeconnect-e693c.firebaseapp.com",
+  databaseURL: "https://chromeconnect-e693c-default-rtdb.firebaseio.com",
+  projectId: "chromeconnect-e693c",
+  storageBucket: "chromeconnect-e693c.appspot.com",
+  messagingSenderId: "1041375254209",
+  appId: "1:1041375254209:web:6c9ad1031bbebfd0bf6640"
+};
 
 firebase.initializeApp(firebaseConfig);
+
+
+
+async function getTab (info) {
+  try {
+    let tabInfo = await chrome.tabs.get(info)
+    const url = tabInfo.url
+    if(!url.includes('sequelize.org')){
+      chrome.action.setPopup({popup: 'deniedPopup.html'})
+    } else {
+      chrome.action.setPopup({popup: 'popup.html'})
+    }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  getTab(tabId)
+})
+
+
+
+chrome.tabs.onActivated.addListener((activeInfo) => {
+  
+  setTimeout(function() {
+    getTab(activeInfo.tabId);
+  }, 100)
+
+})
+
 
 function fetchAllTopics() {
   firebase
