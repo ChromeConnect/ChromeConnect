@@ -91,6 +91,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
 
     return true;
+  } else if (request.message === "delete_topic") {
+    firebase
+      .database()
+      .ref()
+      .child("sequelize")
+      .child(request.payload)
+      .remove();
+    //call fetch topics to reset local storage
+    fetchAllTopics();
   } else if (request.message === "change_name") {
     chrome.storage.local.set(
       {
@@ -124,10 +133,72 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
 
     return true;
+  } else if (request.message === "search_topic") {
+    chrome.storage.local.get("topics", (data) => {
+      if (chrome.runtime.lastError) {
+        sendResponse({
+          message: "fail",
+        });
+
+        return;
+      }
+      //filter object and send back results
+      const topicsArray = Object.keys(data.topics);
+      const results = topicsArray.filter((topic) => {
+        return topic.includes(request.payload);
+      });
+      sendResponse({
+        message: "success",
+        payload: results,
+      });
+    });
+    return true;
   } else if (request.message === "add_topic") {
-    //add to database
-    firebase.database().ref().child("sequelize").child(request.payload).set("");
-    //call fetch topics
-    fetchAllTopics();
+    chrome.identity.getProfileUserInfo((userInfo) => {
+      let email = userInfo.email.toString().slice(0, -10);
+      //add to database
+      firebase
+        .database()
+        .ref()
+        .child("sequelize")
+        .child(request.payload)
+        .child("creator")
+        .set(email);
+      //call fetch topics
+      fetchAllTopics();
+    });
+  } else if (request.message === "get_my_topics") {
+    chrome.identity.getProfileUserInfo((userInfo) => {
+      let email = userInfo.email.toString().slice(0, -10);
+      firebase
+        .database()
+        .ref()
+        .child("sequelize")
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            /*
+            snapshot.val()
+          {
+            new: {creator: "devpablolopez"}
+            other: {creator: "devpablolopez"}
+            topicA: {creator: "default"}
+            topicB: {creator: "default"}
+          }
+        */
+            let data = snapshot.val();
+            let arrayOfTopics = Object.keys(data).filter(function (topic) {
+              return email === data[topic].creator;
+            });
+            sendResponse({
+              message: "success",
+              payload: arrayOfTopics,
+            });
+          } else {
+            console.log("No data available");
+          }
+        });
+    });
+    return true;
   }
 });
