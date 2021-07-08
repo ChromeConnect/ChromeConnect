@@ -19,9 +19,7 @@ firebase.initializeApp(firebaseConfig);
 
 async function getTab (info) {
   try {
-    console.log(info, 'in get')
     let tabInfo = await chrome.tabs.get(info)
-    console.log(tabInfo)
     const url = tabInfo.url
     if(!url.includes('sequelize.org')){
       chrome.action.setPopup({popup: 'deniedPopup.html'})
@@ -34,14 +32,13 @@ async function getTab (info) {
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  console.log(tabId, 'hit in onUpdate')
   getTab(tabId)
 })
 
 
 
 chrome.tabs.onActivated.addListener((activeInfo) => {
-  console.log(activeInfo, 'in active infor')
+  
   setTimeout(function() {
     getTab(activeInfo.tabId);
   }, 100)
