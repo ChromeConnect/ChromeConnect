@@ -37,7 +37,8 @@ viewMyTopicsButton.addEventListener("click", function () {
                   );
                 });
               });
-              deleteButton.textContent = "Delete";
+              deleteButton.textContent = "X";
+              deleteButton.className = "deleteButton";
               deleteButton.addEventListener("click", function () {
                 //prevent chat window from opening
                 window.close();
@@ -45,7 +46,7 @@ viewMyTopicsButton.addEventListener("click", function () {
                 const parentListItemText = deleteButton.parentElement.innerText;
                 const topicToDelete = parentListItemText.substring(
                   0,
-                  parentListItemText.length - 6
+                  parentListItemText.length - 1
                 );
                 //send message to backend to delete from firebase and reset local storage
                 chrome.runtime.sendMessage({
@@ -150,7 +151,7 @@ chrome.runtime.sendMessage(
   },
   (response) => {
     if (response.message === "success") {
-      displayNameText.innerHTML = `Name: "${response.payload}"`;
+      displayNameText.innerText = `Name: "${response.payload}"`;
     }
   }
 );
@@ -163,7 +164,7 @@ changeNameButton.addEventListener("click", function () {
     },
     (response) => {
       if (response.message === "success") {
-        displayNameText.innerHTML = `Name: "${response.payload}"`;
+        displayNameText.innerText = `Name: "${response.payload}"`;
       }
     }
   );

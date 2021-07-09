@@ -1,0 +1,20 @@
+li {
+  cursor: pointer;
+}
+li:hover {
+  color: red;
+}
+
+.deleteButton {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border-color: red;
+  margin-left: 5px;
+}
+
+.deleteButton:hover {
+  cursor: pointer;
+  background-color: black;
+  border-color: black;
+}
