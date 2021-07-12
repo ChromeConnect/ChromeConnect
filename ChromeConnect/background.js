@@ -23,7 +23,8 @@ async function getTab (info) {
     const url = tabInfo.url
     if(!url.includes('sequelize.org')){
       chrome.action.setPopup({popup: 'deniedPopup.html'})
-    } else {
+    } 
+    if(url.includes('sequelize.org') || url.includes('localhost')) {
       chrome.action.setPopup({popup: 'popup.html'})
     }
   } catch (error) {
@@ -31,14 +32,18 @@ async function getTab (info) {
   }
 }
 
+
+
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  console.log('onUpdate', tab)
   getTab(tabId)
 })
 
 
 
 chrome.tabs.onActivated.addListener((activeInfo) => {
-  
+  console.log('onActivated')
   setTimeout(function() {
     getTab(activeInfo.tabId);
   }, 100)
