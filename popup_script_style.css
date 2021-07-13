@@ -1,27 +1,43 @@
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: white;
+	font-family: "Nunito", serif;
+	background-color: white;
 }
 
 li {
-  cursor: pointer;
-  margin-left: 15px;
-  margin-top: 0;
+	/* border-bottom: 1px solid black; */
+	cursor: pointer;
+	margin-left: 0;
+	margin-top: 0;
 }
+
+li:nth-child(odd) {
+	background-color: rgb(244, 244, 244);
+	color: #000;
+	padding-left: 10px;
+}
+
+li:nth-child(even) {
+	color: #000;
+	padding-left: 10px;
+}
+
 li:hover {
-  color: #191970;
+	color: #5454e7;
 }
 
 .deleteButton {
-  background-color: red;
-  color: white;
-  border-radius: 5px;
-  border-color: red;
-  margin-left: 5px;
+	background-color: red;
+	color: white;
+	border-radius: 5px;
+	border-color: red;
+	margin-left: 5px;
 }
 
 .deleteButton:hover {
-  cursor: pointer;
-  background-color: #191970;
-  border-color: #191970;
+	cursor: pointer;
+	background-color: #191970;
+	border-color: #191970;
+}
+.fa-trash-alt {
+	margin-left: 10px;
 }
