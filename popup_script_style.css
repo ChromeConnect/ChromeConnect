@@ -1,27 +1,27 @@
 body {
-	font-family: "Poppins", sans-serif;
-	background-color: #ececec;
+  font-family: "Poppins", sans-serif;
+  background-color: white;
 }
 
 li {
-	cursor: pointer;
-	margin-left: 15px;
-	margin-top: 0;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-top: 0;
 }
 li:hover {
-	color: #191970;
+  color: #191970;
 }
 
 .deleteButton {
-	background-color: red;
-	color: white;
-	border-radius: 5px;
-	border-color: red;
-	margin-left: 5px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border-color: red;
+  margin-left: 5px;
 }
 
 .deleteButton:hover {
-	cursor: pointer;
-	background-color: #191970;
-	border-color: #191970;
+  cursor: pointer;
+  background-color: #191970;
+  border-color: #191970;
 }
