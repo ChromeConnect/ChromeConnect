@@ -21,10 +21,11 @@ async function getTab (info) {
   try {
     let tabInfo = await chrome.tabs.get(info)
     const url = tabInfo.url
+    console.log('hit')
     if(!url.includes('sequelize.org')){
       chrome.action.setPopup({popup: 'deniedPopup.html'})
     } 
-    if(url.includes('sequelize.org') || url.includes('localhost')) {
+    if(url.includes('sequelize.org') || url.includes('chromechat')){
       chrome.action.setPopup({popup: 'popup.html'})
     }
   } catch (error) {
