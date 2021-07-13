@@ -10,14 +10,12 @@ firebaseConfig = {
   projectId: "chromeconnect-e693c",
   storageBucket: "chromeconnect-e693c.appspot.com",
   messagingSenderId: "1041375254209",
-  appId: "1:1041375254209:web:6c9ad1031bbebfd0bf6640"
+  appId: "1:1041375254209:web:6c9ad1031bbebfd0bf6640",
 };
 
 firebase.initializeApp(firebaseConfig);
 
-
-
-async function getTab (info) {
+async function getTab(info) {
   try {
     let tabInfo = await chrome.tabs.get(info)
     const url = tabInfo.url
@@ -29,7 +27,7 @@ async function getTab (info) {
       chrome.action.setPopup({popup: 'popup.html'})
     }
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 
@@ -37,20 +35,14 @@ async function getTab (info) {
 
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  console.log('onUpdate', tab)
-  getTab(tabId)
-})
-
-
+  getTab(tabId);
+});
 
 chrome.tabs.onActivated.addListener((activeInfo) => {
-  console.log('onActivated')
-  setTimeout(function() {
+  setTimeout(function () {
     getTab(activeInfo.tabId);
-  }, 100)
-
-})
-
+  }, 100);
+});
 
 function fetchAllTopics() {
   firebase
@@ -75,7 +67,7 @@ fetchAllTopics();
 //set default name when user first loads website
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({
-    name: "randomUser123",
+    name: `randomUser${Math.floor(Math.random() * 1000)}`,
   });
 });
 

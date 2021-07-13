@@ -28,16 +28,19 @@ viewMyTopicsButton.addEventListener("click", function () {
               listItemElement.addEventListener("click", function () {
                 chrome.storage.local.get("name", (data) => {
                   window.open(
-                    //"https://chromechat.herokuapp.com/",
-                    `http://localhost:8080/${data.name}+${replaceSpaces(
-                      this.innerText
-                    )}`,
+                    `https://chromechat.herokuapp.com/${
+                      data.name
+                    }+${replaceSpaces(this.innerText)}`,
+                    // `http://localhost:8080/${data.name}+${replaceSpaces(
+                    // 	this.innerText
+                    // )}`,
                     "popUpWindow",
                     "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
                   );
                 });
               });
-              deleteButton.textContent = "Delete";
+              deleteButton.textContent = "x";
+              deleteButton.className = "deleteButton";
               deleteButton.addEventListener("click", function () {
                 //prevent chat window from opening
                 window.close();
@@ -45,7 +48,7 @@ viewMyTopicsButton.addEventListener("click", function () {
                 const parentListItemText = deleteButton.parentElement.innerText;
                 const topicToDelete = parentListItemText.substring(
                   0,
-                  parentListItemText.length - 6
+                  parentListItemText.length - 1
                 );
                 //send message to backend to delete from firebase and reset local storage
                 chrome.runtime.sendMessage({
@@ -53,7 +56,9 @@ viewMyTopicsButton.addEventListener("click", function () {
                   payload: topicToDelete,
                 });
                 //tell user deletion was successful
-                alert(`Deleted: ${topicToDelete}`);
+                alert(
+                  `Are you sure you want to delete ${topicToDelete}? Press OK to confirm.`
+                );
               });
               listItemElement.appendChild(deleteButton);
               unorderedList.appendChild(listItemElement);
@@ -80,12 +85,14 @@ viewMyTopicsButton.addEventListener("click", function () {
                 //get name from local storage
                 chrome.storage.local.get("name", (data) => {
                   window.open(
-                    //"https://chromechat.herokuapp.com/",
-                    `http://localhost:8080/${data.name}+${replaceSpaces(
-                      this.innerText
-                    )}`,
+                    `https://chromechat.herokuapp.com/${
+                      data.name
+                    }+${replaceSpaces(this.innerText)}`,
+                    // `http://localhost:8080/${data.name}+${replaceSpaces(
+                    // 	this.innerText
+                    // )}`,
                     "popUpWindow",
-                    "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
+                    "height=700,width=800,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
                   );
                 });
               });
@@ -123,12 +130,14 @@ searchTopicButton.addEventListener("click", function () {
             listItemElement.addEventListener("click", function () {
               chrome.storage.local.get("name", (data) => {
                 window.open(
-                  //"https://chromechat.herokuapp.com/",
-                  `http://localhost:8080/${data.name}+${replaceSpaces(
-                    this.innerText
-                  )}`,
+                  `https://chromechat.herokuapp.com/${
+                    data.name
+                  }+${replaceSpaces(this.innerText)}`,
+                  // `http://localhost:8080/${data.name}+${replaceSpaces(
+                  // 	this.innerText
+                  // )}`,
                   "popUpWindow",
-                  "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
+                  "height=800,width=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
                 );
               });
             });
@@ -150,7 +159,7 @@ chrome.runtime.sendMessage(
   },
   (response) => {
     if (response.message === "success") {
-      displayNameText.innerHTML = `Name: "${response.payload}"`;
+      displayNameText.innerText = `Name: ${response.payload}`;
     }
   }
 );
@@ -163,7 +172,7 @@ changeNameButton.addEventListener("click", function () {
     },
     (response) => {
       if (response.message === "success") {
-        displayNameText.innerHTML = `Name: "${response.payload}"`;
+        displayNameText.innerText = `Name: ${response.payload}`;
       }
     }
   );
@@ -177,9 +186,11 @@ addTopicButton.addEventListener("click", function () {
   chrome.storage.local.get("name", (data) => {
     window.open(
       //"https://chromechat.herokuapp.com/",
-      `http://localhost:8080/${data.name}+${replaceSpaces(topicInput.value)}`,
+      `https://chromechat.herokuapp.com/${data.name}+${replaceSpaces(
+        topicInput.value
+      )}`,
       "popUpWindow",
-      "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
+      "height=800,width=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
     );
   });
 });
@@ -201,11 +212,11 @@ chrome.runtime.sendMessage(
             chrome.storage.local.get("name", (data) => {
               window.open(
                 //"https://chromechat.herokuapp.com/",
-                `http://localhost:8080/${data.name}+${replaceSpaces(
+                `https://chromechat.herokuapp.com/${data.name}+${replaceSpaces(
                   this.innerText
                 )}`,
                 "popUpWindow",
-                "height=300,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
+                "height=700,width=875,right=500,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
               );
             });
           });
