@@ -21,7 +21,8 @@ async function getTab(info) {
     const url = tabInfo.url;
     if (!url.includes("sequelize.org")) {
       chrome.action.setPopup({ popup: "deniedPopup.html" });
-    } else {
+    } 
+    if(url.includes("sequelize.org") || url.includes("chromechat")) {
       chrome.action.setPopup({ popup: "popup.html" });
     }
   } catch (error) {
