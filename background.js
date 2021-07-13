@@ -1,6 +1,6 @@
 //fetch all topics and store into local storage as soon as background is injected
 //const deniedPopup = require("./deniedPopup")
-
+var currentWebsite = "sequelize";
 var db = null;
 self.importScripts("firebase/app.js", "firebase/realtimedatabase.js");
 firebaseConfig = {
@@ -19,10 +19,30 @@ async function getTab(info) {
   try {
     let tabInfo = await chrome.tabs.get(info);
     const url = tabInfo.url;
-    if (!url.includes("sequelize.org")) {
+    if (
+      !url.includes("sequelize.org") ||
+      !url.includes("reactjs.org") ||
+      !url.includes("expressjs.com")
+    ) {
       chrome.action.setPopup({ popup: "deniedPopup.html" });
-    } 
-    if(url.includes("sequelize.org") || url.includes("chromechat")) {
+      currentWebsite = null;
+    }
+    if (url.includes("sequelize.org")) {
+      chrome.action.setPopup({ popup: "popup.html" });
+      currentWebsite = "sequelize";
+      fetchAllTopics();
+    }
+    if (url.includes("expressjs.com")) {
+      chrome.action.setPopup({ popup: "popup.html" });
+      currentWebsite = "express";
+      fetchAllTopics();
+    }
+    if (url.includes("reactjs.org")) {
+      chrome.action.setPopup({ popup: "popup.html" });
+      currentWebsite = "react";
+      fetchAllTopics();
+    }
+    if (url.includes("chromechat")) {
       chrome.action.setPopup({ popup: "popup.html" });
     }
   } catch (error) {
@@ -44,7 +64,7 @@ function fetchAllTopics() {
   firebase
     .database()
     .ref()
-    .child("sequelize")
+    .child(currentWebsite)
     .get()
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -89,7 +109,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     firebase
       .database()
       .ref()
-      .child("sequelize")
+      .child(currentWebsite)
       .child(request.payload)
       .remove();
     //call fetch topics to reset local storage
@@ -154,7 +174,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       firebase
         .database()
         .ref()
-        .child("sequelize")
+        .child(currentWebsite)
         .child(request.payload)
         .child("creator")
         .set(email);
@@ -167,7 +187,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       firebase
         .database()
         .ref()
-        .child("sequelize")
+        .child(currentWebsite)
         .get()
         .then((snapshot) => {
           if (snapshot.exists()) {
