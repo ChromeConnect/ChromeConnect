@@ -39,7 +39,7 @@ viewMyTopicsButton.addEventListener("click", function () {
 									)
 								})
 							})
-							deleteButton.textContent = "X"
+							deleteButton.textContent = "x"
 							deleteButton.className = "deleteButton"
 							deleteButton.addEventListener("click", function () {
 								//prevent chat window from opening
@@ -56,7 +56,9 @@ viewMyTopicsButton.addEventListener("click", function () {
 									payload: topicToDelete,
 								})
 								//tell user deletion was successful
-								alert(`Deleted: ${topicToDelete}`)
+								alert(
+									`Are you sure you want to delete ${topicToDelete}? Press OK to confirm.`
+								)
 							})
 							listItemElement.appendChild(deleteButton)
 							unorderedList.appendChild(listItemElement)
@@ -170,7 +172,7 @@ changeNameButton.addEventListener("click", function () {
 		},
 		(response) => {
 			if (response.message === "success") {
-				displayNameText.innerText = `Name: "${response.payload}"`
+				displayNameText.innerText = `Name: ${response.payload}`
 			}
 		}
 	)
