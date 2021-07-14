@@ -1,6 +1,6 @@
 ## Setup
 
-1 Clone the repo
+1 ['Download ZIP'](https://github.com/ChromeConnect/ChromeConnect/archive/refs/heads/main.zip )
 
 2 Open Chrome and navigate to the extensions menu by clicking on the icon in the top right of the browser
 !['Chrome Connect'](https://github.com/ChromeConnect/ChromeConnect/blob/main/public/moveToExten.png?raw=true)
