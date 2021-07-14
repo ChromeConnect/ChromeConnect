@@ -25,7 +25,7 @@ async function getTab(info) {
       !url.includes("expressjs.com")
     ) {
       chrome.action.setPopup({ popup: "deniedPopup.html" });
-      currentWebsite = null;
+      //currentWebsite = null;
     }
     if (url.includes("sequelize.org")) {
       chrome.action.setPopup({ popup: "popup.html" });
