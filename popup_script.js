@@ -7,6 +7,17 @@ let topicInput = document.getElementById("topicInput");
 let searchTopicInput = document.getElementById("searchTopicInput");
 let searchTopicButton = document.getElementById("searchTopicButton");
 let viewMyTopicsButton = document.getElementById("viewMyTopicsButton");
+let currentWebsite = null;
+chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+  let url = tabs[0].url;
+  if (url.includes("react")) {
+    currentWebsite = "react";
+  } else if (url.includes("express")) {
+    currentWebsite = "express";
+  } else if (url.includes("sequelize")) {
+    currentWebsite = "sequelize";
+  }
+});
 
 viewMyTopicsButton.addEventListener("click", function () {
   if (viewMyTopicsButton.innerText !== "Go Back") {
@@ -28,7 +39,7 @@ viewMyTopicsButton.addEventListener("click", function () {
               listItemElement.addEventListener("click", function () {
                 chrome.storage.local.get("name", (data) => {
                   window.open(
-                    `https://chromechat.herokuapp.com/${
+                    `https://chromechat.herokuapp.com/${currentWebsite}/${
                       data.name
                     }+${replaceSpaces(this.innerText)}`,
                     // `http://localhost:8080/${data.name}+${replaceSpaces(
@@ -84,7 +95,7 @@ viewMyTopicsButton.addEventListener("click", function () {
                 //get name from local storage
                 chrome.storage.local.get("name", (data) => {
                   window.open(
-                    `https://chromechat.herokuapp.com/${
+                    `https://chromechat.herokuapp.com/${currentWebsite}/${
                       data.name
                     }+${replaceSpaces(this.innerText)}`,
                     // `http://localhost:8080/${data.name}+${replaceSpaces(
@@ -129,7 +140,7 @@ searchTopicButton.addEventListener("click", function () {
             listItemElement.addEventListener("click", function () {
               chrome.storage.local.get("name", (data) => {
                 window.open(
-                  `https://chromechat.herokuapp.com/${
+                  `https://chromechat.herokuapp.com/${currentWebsite}/${
                     data.name
                   }+${replaceSpaces(this.innerText)}`,
                   // `http://localhost:8080/${data.name}+${replaceSpaces(
@@ -188,9 +199,9 @@ addTopicButton.addEventListener("click", function () {
     topicInput.value = "";
     window.open(
       //"https://chromechat.herokuapp.com/",
-      `https://chromechat.herokuapp.com/${data.name}+${replaceSpaces(
-        tabTopic
-      )}`,
+      `https://chromechat.herokuapp.com/${currentWebsite}/${
+        data.name
+      }+${replaceSpaces(tabTopic)}`,
       "popUpWindow",
       "height=800,width=900,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
     );
@@ -213,10 +224,9 @@ chrome.runtime.sendMessage(
             //get name from local storage
             chrome.storage.local.get("name", (data) => {
               window.open(
-                //"https://chromechat.herokuapp.com/",
-                `https://chromechat.herokuapp.com/${data.name}+${replaceSpaces(
-                  this.innerText
-                )}`,
+                `https://chromechat.herokuapp.com/${currentWebsite}/${
+                  data.name
+                }+${replaceSpaces(this.innerText)}`,
                 "popUpWindow",
                 "height=700,width=875,right=500,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=yes,location=no,directories=no, status=yes"
               );
