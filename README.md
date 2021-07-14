@@ -29,4 +29,4 @@ Chrome Connect is a collaborative extension tool that has the following features
 
 Replace firebase config object inside background.js with your own firebase api key.
 
-- [Instructions](https://github.com/ChromeConnect/ChromeConnect/blob/3bf4f12964374219940bb28fee9b21477d5ffa43/instruction.md)
+- [Instructions](https://github.com/ChromeConnect/ChromeConnect/blob/main/instruction.md)
