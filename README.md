@@ -2,7 +2,7 @@
 
 ## About The Project
 
-!['Chrome Connect'](https://github.com/GracefullyHotter/GracefullyHotter/blob/main/public/gracefullyhotterscreenshot.png)
+!['Chrome Connect'](https://github.com/ChromeConnect/ChromeConnect/blob/main/public/ChromeConnect.png?raw=true)
 
 Chrome Connect is a collaborative extension tool that has the following features:
 
