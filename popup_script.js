@@ -13,13 +13,13 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   let url = tabs[0].url;
   if (url.includes("react")) {
     currentWebsite = "react";
-    websiteDisplayText.innerText = "Website: React";
+    websiteDisplayText.innerText = "React";
   } else if (url.includes("express")) {
     currentWebsite = "express";
-    websiteDisplayText.innerText = "Website: Express";
+    websiteDisplayText.innerText = "Express";
   } else if (url.includes("sequelize")) {
     currentWebsite = "sequelize";
-    websiteDisplayText.innerText = "Website: Sequelize";
+    websiteDisplayText.innerText = "Sequelize";
   }
 });
 
