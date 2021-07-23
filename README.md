@@ -11,6 +11,10 @@ Chrome Connect is a collaborative extension tool that has the following features
 - Delete user created topics.
 - Click on topics to open a realtime chat window along with a realtime white board.
 
+## Demo
+
+- [YouTube](https://www.youtube.com/watch?v=1j5VuLIrwGs&list=PLx0iOsdUOUmnxvdRhz1frAMDEiERKJ9-v&index=10)
+
 ## Notable Libraries
 
 - [Bulma](https://bulma.io/)
